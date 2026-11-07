@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0a1428">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="KME Apps">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a1428'/%3E%3Cpath d='M14 46V18h6v11l10-11h7L26 30l12 16h-7l-9-12-2 2v10z' fill='%23c6f24e'/%3E%3Ccircle cx='47' cy='42' r='5' fill='%234da3ff'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a1428'/%3E%3Cpath d='M14 46V18h6v11l10-11h7L26 30l12 16h-7l-9-12-2 2v10z' fill='%23c6f24e'/%3E%3Ccircle cx='47' cy='42' r='5' fill='%234da3ff'/%3E%3C/svg%3E">
+<title>KME Apps</title>
+<style>
+:root {
+  --bg: #0a1428; --bg2: #0e1b36; --card: #13234a; --card2: #182b58; --line: #22376b;
+  --ink: #eef3ff; --ink2: #a9b8d9; --ink3: #7486ad;
+  --volt: #c6f24e; --blue: #4da3ff; --red: #ff6b6b; --amber: #ffc857; --green: #3ddc84;
+  --r: 14px; --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.4 var(--font); -webkit-font-smoothing: antialiased; }
+body { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+a { color: var(--blue); }
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+header { position: sticky; top: 0; z-index: 5; background: rgba(10, 20, 40, .92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); padding-top: env(safe-area-inset-top); }
+.hbar { display: flex; align-items: center; gap: 10px; height: 58px; }
+.logo { width: 34px; height: 34px; border-radius: 9px; background: var(--card); display: grid; place-items: center; flex: none; }
+.brand { font-weight: 800; font-size: 19px; letter-spacing: -.01em; }
+.brand span { color: var(--volt); }
+.grow { flex: 1; min-width: 0; }
+.seg { display: inline-flex; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 2px; }
+.seg button { border: 0; background: none; padding: 5px 10px; border-radius: 8px; font-size: 13px; font-weight: 700; color: var(--ink2); }
+.seg button[aria-pressed="true"] { background: var(--card2); color: var(--ink); }
+.icon-btn { border: 1px solid var(--line); background: var(--card); width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; color: var(--ink2); }
+h1 { font-size: 24px; margin: 18px 0 4px; letter-spacing: -.01em; }
+h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .1em; color: var(--ink3); margin: 22px 0 8px; font-weight: 800; }
+.sub { color: var(--ink2); font-size: 14px; margin: 0 0 6px; }
+.tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px; }
+@media (min-width: 640px) { .tiles { grid-template-columns: repeat(4, 1fr); } }
+.tile { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 12px 14px; }
+.tile b { display: block; font-size: 26px; font-weight: 800; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.tile span { font-size: 12px; color: var(--ink2); font-weight: 600; }
+.tile.warn b { color: var(--red); }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 14px; }
+.card + .card { margin-top: 10px; }
+.chart { width: 100%; height: 120px; display: block; }
+.chart-x { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink3); margin-top: 4px; }
+.list { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-top: 1px solid var(--line); width: 100%; text-align: left; background: none; border-left: 0; border-right: 0; border-bottom: 0; }
+.row:first-child { border-top: 0; }
+button.row:active { background: var(--card2); }
+.row .t { font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.row .m { font-size: 12.5px; color: var(--ink2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.num { font-weight: 800; font-variant-numeric: tabular-nums; text-align: right; }
+.num small { display: block; font-size: 11px; color: var(--ink3); font-weight: 600; }
+.spark { width: 76px; height: 26px; flex: none; }
+.chip { display: inline-block; font-size: 11px; font-weight: 800; padding: 2px 7px; border-radius: 99px; background: var(--card2); color: var(--ink2); border: 1px solid var(--line); vertical-align: 1px; }
+.chip.red { background: rgba(255, 107, 107, .15); color: var(--red); border-color: transparent; }
+.chip.volt { background: rgba(198, 242, 78, .14); color: var(--volt); border-color: transparent; }
+.chip.blue { background: rgba(77, 163, 255, .15); color: var(--blue); border-color: transparent; }
+.chip.amber { background: rgba(255, 200, 87, .15); color: var(--amber); border-color: transparent; }
+.bars .b { display: flex; align-items: center; gap: 10px; padding: 7px 0; font-size: 14px; }
+.bars .b .l { width: 42%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bars .b .track { flex: 1; height: 8px; background: var(--bg2); border-radius: 99px; overflow: hidden; }
+.bars .b .fill { height: 100%; background: var(--blue); border-radius: 99px; }
+.bars .b .n { width: 46px; text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+.btn { border: 1px solid var(--line); background: var(--card2); border-radius: 11px; padding: 10px 14px; font-weight: 700; }
+.btn.primary { background: var(--volt); color: #0a1428; border-color: transparent; }
+.btn.sm { padding: 6px 11px; font-size: 13px; border-radius: 9px; }
+.btn:disabled { opacity: .5; }
+.muted { color: var(--ink2); }
+.small { font-size: 13px; }
+.empty { text-align: center; padding: 28px 16px; color: var(--ink2); }
+.err-text { color: var(--red); font-size: 14px; margin-top: 8px; }
+.input { width: 100%; background: var(--bg2); border: 1px solid var(--line); border-radius: 11px; padding: 12px 13px; outline: none; }
+.input:focus { border-color: var(--blue); }
+label span { display: block; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--ink3); margin: 12px 0 6px; }
+nav.tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; background: rgba(10, 20, 40, .95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom); }
+nav.tabs .in { max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); }
+nav.tabs button { border: 0; background: none; padding: 9px 2px 8px; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 11px; font-weight: 700; color: var(--ink3); }
+nav.tabs button svg { width: 22px; height: 22px; }
+nav.tabs button[aria-current="page"] { color: var(--volt); }
+.login { min-height: 100vh; display: grid; place-items: center; padding: 24px 16px calc(24px + env(safe-area-inset-bottom)); }
+.login .box { width: 100%; max-width: 380px; }
+.login .mark { width: 64px; height: 64px; border-radius: 16px; background: var(--card); display: grid; place-items: center; margin-bottom: 14px; }
+code, .code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; }
+.code { background: var(--bg2); border: 1px solid var(--line); border-radius: 10px; padding: 10px; word-break: break-all; display: block; color: var(--ink2); }
+.search { margin: 10px 0; }
+.flex { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.back { border: 0; background: none; color: var(--blue); font-weight: 700; padding: 14px 0 0; }
+.ok { color: var(--green); font-weight: 800; }
+.no { color: var(--amber); font-weight: 800; }
+.spin { display: inline-block; width: 16px; height: 16px; border: 2px solid var(--line); border-top-color: var(--volt); border-radius: 50%; animation: s .8s linear infinite; vertical-align: -3px; }
+@keyframes s { to { transform: rotate(360deg); } }
+.toast { position: fixed; left: 50%; bottom: calc(90px + env(safe-area-inset-bottom)); transform: translateX(-50%); background: var(--card2); border: 1px solid var(--line); padding: 10px 14px; border-radius: 12px; font-weight: 700; font-size: 14px; z-index: 9; box-shadow: 0 10px 30px rgba(0,0,0,.4); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(function () {
+  'use strict';
+  // Display names for app slugs (data-app="..."). Any new slug still shows up on its own.
+  var NAMES = {
+    'sports-hub': 'The Sports Hub', 'gs-hub': 'GS Baseball Hub', 'my-gun-collection': 'My Gun Collection',
+    'big-bigs-guns': 'Big Big’s Guns', 'peytons-guns': 'Peyton’s Guns', 'amazon-list': 'AmazonList', 'bltc': 'BLTC',
+    'time-sheet': 'Time Sheet', 'swamp-donkey': 'Swamp Donkey', 'pitch-count-passport': 'Pitch Count Passport',
+    'tournament-manager': 'Tournament Manager', 'tryout-form': 'GS Tryout Form', 'gs-fundraising': 'GS Fundraiser',
+    'gs-photo-lab': 'GS Photo Lab', 'image-to-dtf': 'ImagetoDTF', 'home-security': 'Front Door', 'house-budget': 'House Budget',
+    'sports-flyer': 'Sports Flyer', 'coach-comms': 'Coach Comms', 'wifi-scanner': 'WifiScanner', 'sportsbot': 'SportsBot'
+  };
+  var PLATS = { 'ios': 'iPhone (browser)', 'ios-app': 'iPhone app', 'ios-home': 'iPhone Home Screen', 'android': 'Android (browser)', 'android-app': 'Android app', 'android-home': 'Android Home Screen', 'web': 'Computer', 'web-home': 'Installed (computer)' };
+  var S = { me: null, tab: 'overview', days: 30, app: null, data: {}, q: '', busy: false };
+  try { var saved = JSON.parse(localStorage.getItem('kme_ui') || '{}'); if (saved.tab) S.tab = saved.tab; if (saved.days) S.days = saved.days; } catch (e) {}
+  var root = document.getElementById('root');
+
+  function esc(v) { return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function nm(slug) { return NAMES[slug] || slug.replace(/-/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); }); }
+  function n(v) { return Number(v || 0).toLocaleString(); }
+  function ago(ts) {
+    if (!ts) return 'never';
+    var s = Math.round((Date.now() - ts) / 1000);
+    if (s < 60) return 'just now'; if (s < 3600) return Math.floor(s / 60) + 'm ago'; if (s < 86400) return Math.floor(s / 3600) + 'h ago';
+    if (s < 86400 * 30) return Math.floor(s / 86400) + 'd ago';
+    return new Date(ts).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+  function date(ts) { return ts ? new Date(ts).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : '—'; }
+  function shortDay(d) { var p = d.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }); }
+  function save() { try { localStorage.setItem('kme_ui', JSON.stringify({ tab: S.tab, days: S.days })); } catch (e) {} }
+  function toast(t) { var el = document.createElement('div'); el.className = 'toast'; el.textContent = t; document.body.appendChild(el); setTimeout(function () { el.remove(); }, 2600); }
+
+  function api(path, opts) {
+    opts = opts || {};
+    var init = { method: opts.method || 'GET', credentials: 'same-origin', headers: { 'x-kme': '1' } };
+    if (opts.body) { init.headers['content-type'] = 'application/json'; init.body = JSON.stringify(opts.body); }
+    return fetch(path, init).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (d) {
+        if (r.status === 401 && path !== '/api/login') { S.me = { signedIn: false, setup: true }; render(); throw new Error('signin'); }
+        if (!r.ok) throw new Error(d.message || d.error || ('Error ' + r.status));
+        return d;
+      });
+    });
+  }
+
+  // ----- charts -----
+  function barChart(vals, color) {
+    var max = Math.max.apply(null, vals.concat([1])), w = 600, h = 120, cnt = vals.length || 1, gap = cnt > 60 ? 1 : 2, bw = (w - gap * (cnt - 1)) / cnt;
+    var bars = vals.map(function (v, i) { var bh = v ? Math.max(2, (v / max) * (h - 14)) : 0; return '<rect x="' + (i * (bw + gap)).toFixed(1) + '" y="' + (h - bh).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + bh.toFixed(1) + '" rx="' + Math.min(3, bw / 3).toFixed(1) + '" fill="' + (color || 'var(--blue)') + '"><title>' + v + '</title></rect>'; }).join('');
+    return '<svg class="chart" viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="none" role="img" aria-label="Chart">' +
+      '<line x1="0" y1="' + (h - 0.5) + '" x2="' + w + '" y2="' + (h - 0.5) + '" stroke="var(--line)"/>' + bars +
+      '<text x="' + w + '" y="10" text-anchor="end" font-size="11" fill="var(--ink3)">' + n(max) + '</text></svg>';
+  }
+  function axis(days) { return days.length ? '<div class="chart-x"><span>' + esc(shortDay(days[0])) + '</span><span>' + esc(shortDay(days[days.length - 1])) + '</span></div>' : ''; }
+  function spark(vals) {
+    var max = Math.max.apply(null, vals.concat([1])), w = 76, h = 26, step = vals.length > 1 ? w / (vals.length - 1) : w;
+    var pts = vals.map(function (v, i) { return (i * step).toFixed(1) + ',' + (h - 2 - (v / max) * (h - 4)).toFixed(1); }).join(' ');
+    return '<svg class="spark" viewBox="0 0 ' + w + ' ' + h + '"><polyline points="' + pts + '" fill="none" stroke="var(--volt)" stroke-width="1.8" stroke-linejoin="round"/></svg>';
+  }
+  function bars(rows, label, val) {
+    if (!rows || !rows.length) return '<div class="muted small">Nothing yet.</div>';
+    var max = Math.max.apply(null, rows.map(val).concat([1]));
+    return '<div class="bars">' + rows.map(function (r) { var v = val(r); return '<div class="b"><span class="l">' + esc(label(r)) + '</span><span class="track"><span class="fill" style="width:' + Math.round(v / max * 100) + '%;display:block"></span></span><span class="n">' + n(v) + '</span></div>'; }).join('') + '</div>';
+  }
+
+  // ----- data loading -----
+  function load(key, path) {
+    S.data[key] = S.data[key] || { loading: true };
+    S.data[key].loading = true;
+    return api(path).then(function (d) { S.data[key] = d; render(); }).catch(function (e) { if (e.message !== 'signin') { S.data[key] = { error: e.message }; render(); } });
+  }
+  function loadTab() {
+    if (S.tab === 'overview') return S.app ? load('app:' + S.app + ':' + S.days, '/api/app?app=' + encodeURIComponent(S.app) + '&days=' + S.days) : load('overview:' + S.days, '/api/overview?days=' + S.days);
+    if (S.tab === 'sportshub') return load('sportshub', '/api/sportshub');
+    if (S.tab === 'appstore') return load('appstore:' + S.days, '/api/appstore?days=' + S.days);
+    if (S.tab === 'errors') return load('errors:' + S.days, '/api/errors?days=' + S.days);
+    if (S.tab === 'setup') return load('setup', '/api/setup');
+  }
+  function cur() {
+    if (S.tab === 'overview') return S.data[S.app ? 'app:' + S.app + ':' + S.days : 'overview:' + S.days];
+    if (S.tab === 'sportshub') return S.data.sportshub;
+    if (S.tab === 'appstore') return S.data['appstore:' + S.days];
+    if (S.tab === 'errors') return S.data['errors:' + S.days];
+    return S.data.setup;
+  }
+
+  // ----- screens -----
+  function loginHTML() {
+    var setup = S.me && S.me.setup === false;
+    return '<div class="login"><form class="box" id="login" autocomplete="on">' +
+      '<div class="mark">' + LOGO(40) + '</div><div class="brand" style="font-size:28px">KME <span>Apps</span></div>' +
+      '<p class="sub">Analytics for all your apps.</p>' +
+      (setup ? '<div class="card small" style="margin-top:14px">Add <code>KME_USER</code> and <code>KME_PASSWORD</code> as secrets on the <b>kme-apps</b> Worker in Cloudflare, then reload.</div>' :
+      '<label><span>Username</span><input class="input" name="user" autocomplete="username" autocapitalize="none" autocorrect="off" required></label>' +
+      '<label><span>Password</span><input class="input" name="pass" type="password" autocomplete="current-password" required></label>' +
+      '<div id="lerr" class="err-text"></div>' +
+      '<button class="btn primary" style="width:100%;margin-top:16px" type="submit">Sign in</button>') +
+      '</form></div>';
+  }
+  function LOGO(sz) { return '<svg width="' + sz + '" height="' + sz + '" viewBox="0 0 64 64"><path d="M14 46V18h6v11l10-11h7L26 30l12 16h-7l-9-12-2 2v10z" fill="var(--volt)"/><circle cx="47" cy="42" r="5" fill="var(--blue)"/></svg>'; }
+  function loading(d) { return !d || (d.loading && !d.days && !d.accounts && !d.errors && !d.origin) ? '<div class="empty"><span class="spin"></span></div>' : d.error ? '<div class="card err-text">' + esc(d.error) + '</div>' : ''; }
+
+  function overviewHTML() {
+    var d = cur(), w = loading(d); if (w) return w;
+    var h = '<h1>Overview</h1><p class="sub">Last ' + S.days + ' days across every app with the tracker.</p>' +
+      '<div class="tiles"><div class="tile"><b>' + n(d.today.views) + '</b><span>Visits today</span></div><div class="tile"><b>' + n(d.today.devices) + '</b><span>People today</span></div>' +
+      '<div class="tile"><b>' + n(d.total.views) + '</b><span>Visits, ' + S.days + ' days</span></div><div class="tile' + (d.errors24 ? ' warn' : '') + '"><b>' + n(d.errors24) + '</b><span>Errors, last 24h</span></div></div>';
+    if (!d.apps.length) return h + '<div class="card empty" style="margin-top:14px"><b>No visits yet.</b><br>Add the tracker to your apps from the <b>Setup</b> tab and visits show up here within seconds.</div>';
+    h += '<h2>All apps</h2><div class="card">' + barChart(d.allDays) + axis(d.days) + '</div>';
+    h += '<h2>Apps</h2><div class="list">' + d.apps.map(function (a) {
+      return '<button class="row" data-app="' + esc(a.app) + '"><span class="grow"><div class="t">' + esc(nm(a.app)) + (a.errors24 ? ' <span class="chip red">' + a.errors24 + ' error' + (a.errors24 === 1 ? '' : 's') + '</span>' : '') + '</div><div class="m">' + n(a.devices) + ' people · last visit ' + esc(ago(a.last)) + '</div></span>' + spark(a.days) + '<span class="num">' + n(a.views) + '<small>visits</small></span></button>';
+    }).join('') + '</div>';
+    return h;
+  }
+  function appHTML() {
+    var d = cur(), w = loading(d); if (w) return '<button class="back" data-act="back">‹ All apps</button>' + w;
+    var h = '<button class="back" data-act="back">‹ All apps</button><h1>' + esc(nm(d.app)) + '</h1><p class="sub"><code>' + esc(d.app) + '</code> · last ' + S.days + ' days</p>' +
+      '<div class="tiles"><div class="tile"><b>' + n(d.total.views) + '</b><span>Visits</span></div><div class="tile"><b>' + n(d.total.devices) + '</b><span>People</span></div>' +
+      '<div class="tile"><b>' + n(d.total.newDevices) + '</b><span>New people</span></div><div class="tile' + (d.errors.length ? ' warn' : '') + '"><b>' + n(d.errors.reduce(function (t, e) { return t + e.n; }, 0)) + '</b><span>Errors</span></div></div>' +
+      '<h2>Visits per day</h2><div class="card">' + barChart(d.views) + axis(d.days) + '</div>' +
+      '<h2>People per day</h2><div class="card">' + barChart(d.devices, 'var(--volt)') + axis(d.days) + '</div>' +
+      '<h2>How they open it</h2><div class="card">' + bars(d.plats, function (r) { return PLATS[r.plat] || r.plat || 'Unknown'; }, function (r) { return r.n; }) + '</div>' +
+      '<h2>Top pages</h2><div class="card">' + bars(d.paths, function (r) { return r.path || '/'; }, function (r) { return r.n; }) + '</div>' +
+      '<h2>Countries</h2><div class="card">' + bars(d.countries, function (r) { return r.country || 'Unknown'; }, function (r) { return r.n; }) + '</div>' +
+      '<h2>Came from</h2><div class="card">' + bars(d.refs, function (r) { return r.ref; }, function (r) { return r.n; }) + '</div>';
+    if (d.events && d.events.length) h += '<h2>Milestones</h2><div class="card">' + bars(d.events, function (r) { return r.msg; }, function (r) { return r.n; }) + '</div>';
+    h += '<h2>Errors</h2>' + errorList(d.errors.map(function (e) { e.app = d.app; return e; }), true);
+    return h;
+  }
+  function errorList(list, hideApp) {
+    if (!list.length) return '<div class="card muted">No errors. 🎉</div>';
+    return '<div class="list">' + list.map(function (e) {
+      return '<div class="row" style="align-items:flex-start"><span class="grow"><div class="t" style="white-space:normal;word-break:break-word">' + esc(e.msg) + '</div><div class="m" style="white-space:normal">' + (hideApp ? '' : '<span class="chip blue">' + esc(nm(e.app)) + '</span> ') + (e.src ? '<code>' + esc(e.src) + '</code> · ' : '') + n(e.devs) + ' ' + (e.devs === 1 ? 'person' : 'people') + ' · last ' + esc(ago(e.last)) + '</div></span><span class="num">' + n(e.n) + '<small>times</small></span></div>';
+    }).join('') + '</div>';
+  }
+  function errorsHTML() {
+    var d = cur(), w = loading(d); if (w) return w;
+    return '<h1>Errors</h1><p class="sub">JavaScript errors your users hit in the last ' + S.days + ' days, grouped. Up to 5 per page load are reported.</p>' + errorList(d.errors);
+  }
+  function sportsHubHTML() {
+    var d = cur(), w = loading(d); if (w) return '<h1>Sports Hub</h1>' + w;
+    if (!d.setup) return '<h1>Sports Hub</h1><div class="card">Sign-ups need the Firebase service account. Add it as <code>FIREBASE_SERVICE_ACCOUNT</code> on the Worker. Steps are on the <b>Setup</b> tab.</div>';
+    var q = S.q.trim().toLowerCase(), t = d.totals;
+    var teamName = {}; d.teams.forEach(function (x) { teamName[x.id] = x.name; });
+    var plans = Object.keys(t.plans).map(function (k) { return '<span class="chip ' + (k === 'elite' ? 'amber' : k === 'pro' ? 'volt' : '') + '">' + esc(k) + ' ' + t.plans[k] + '</span>'; }).join(' ');
+    var acc = d.accounts.filter(function (a) { return !q || (a.email + ' ' + a.name + ' ' + a.teams.map(function (id) { return teamName[id] || id; }).join(' ')).toLowerCase().indexOf(q) >= 0; });
+    var teams = d.teams.filter(function (x) { return !q || (x.name + ' ' + x.id + ' ' + x.ownerEmail).toLowerCase().indexOf(q) >= 0; });
+    return '<div class="flex" style="justify-content:space-between"><h1>Sports Hub</h1><button class="btn sm" data-act="shRefresh">' + (d.loading ? '<span class="spin"></span>' : 'Refresh') + '</button></div>' +
+      '<p class="sub">Accounts and teams from the app’s database. Updated ' + esc(ago(d.at)) + '.</p>' +
+      '<div class="tiles"><div class="tile"><b>' + n(t.accounts) + '</b><span>Accounts</span></div><div class="tile"><b>' + n(t.new7) + '</b><span>New this week</span></div>' +
+      '<div class="tile"><b>' + n(t.active7) + '</b><span>Active this week</span></div><div class="tile"><b>' + n(t.teams) + '</b><span>Teams</span></div></div>' +
+      '<div style="margin-top:10px">' + plans + '</div>' +
+      '<input class="input search" data-q placeholder="Search accounts and teams" value="' + esc(S.q) + '">' +
+      '<h2>Newest accounts</h2><div class="list">' + (acc.length ? acc.slice(0, 200).map(function (a) {
+        var tm = a.teams.map(function (id) { return teamName[id] || id; });
+        return '<div class="row"><span class="grow"><div class="t">' + esc(a.email || a.name || 'No email (' + a.via + ')') + (a.disabled ? ' <span class="chip red">disabled</span>' : '') + '</div><div class="m">' + (a.name && a.email ? esc(a.name) + ' · ' : '') + 'joined ' + esc(date(a.created)) + ' · active ' + esc(ago(a.lastActive)) + '</div>' + (tm.length ? '<div class="m">' + esc(tm.join(', ')) + '</div>' : '<div class="m">No team yet</div>') + '</span></div>';
+      }).join('') : '<div class="row muted">No matches.</div>') + '</div>' +
+      '<h2>Teams</h2><div class="list">' + (teams.length ? teams.map(function (x) {
+        return '<div class="row"><span class="grow"><div class="t">' + esc(x.name) + ' <span class="chip ' + (x.plan === 'elite' ? 'amber' : x.plan === 'pro' ? 'volt' : '') + '">' + esc(x.plan) + '</span></div><div class="m">' + esc(x.ownerEmail || 'Owner unknown') + ' · created ' + esc(date(x.created)) + (x.season ? ' · ' + esc(x.season) : '') + '</div></span><span class="num">' + n(x.members) + '<small>people</small></span></div>';
+      }).join('') : '<div class="row muted">No matches.</div>') + '</div>';
+  }
+  function appStoreHTML() {
+    var d = cur(), w = loading(d); if (w) return '<h1>App Store</h1>' + w;
+    if (!d.setup) return '<h1>App Store</h1><div class="card">Downloads need an App Store Connect API key. Missing: ' + d.missing.map(function (k) { return '<code>' + esc(k) + '</code>'; }).join(', ') + '. Steps are on the <b>Setup</b> tab.</div>';
+    var tot = d.apps.reduce(function (t, a) { t.new += a.new; t.re += a.re; t.update += a.update; t.iap += a.iap; return t; }, { new: 0, re: 0, update: 0, iap: 0 });
+    var h = '<div class="flex" style="justify-content:space-between"><h1>App Store</h1><button class="btn sm" data-act="ascSync" ' + (S.busy ? 'disabled' : '') + '>' + (S.busy ? '<span class="spin"></span> Syncing' : 'Sync now') + '</button></div>' +
+      '<p class="sub">From Apple’s daily sales reports (Pacific time, about a day behind). ' + (d.lastSync ? 'Last sync ' + esc(ago(d.lastSync.at)) + '.' : 'Not synced yet. Tap Sync now.') + '</p>' +
+      '<div class="tiles"><div class="tile"><b>' + n(tot.new) + '</b><span>First-time downloads</span></div><div class="tile"><b>' + n(tot.re) + '</b><span>Redownloads</span></div>' +
+      '<div class="tile"><b>' + n(tot.update) + '</b><span>Updates</span></div><div class="tile"><b>' + n(tot.iap) + '</b><span>In-app purchases</span></div></div>';
+    if (!d.apps.length) return h + '<div class="card empty" style="margin-top:14px">No downloads in the last ' + S.days + ' days yet.</div>';
+    h += d.apps.map(function (a) {
+      var money = Object.keys(a.proceeds).map(function (c) { return c + ' ' + a.proceeds[c].toFixed(2); }).join(' · ');
+      return '<h2>' + esc(a.name) + '</h2><div class="card"><div class="flex small muted" style="margin-bottom:8px"><span><b style="color:var(--ink)">' + n(a.new) + '</b> new</span><span><b style="color:var(--ink)">' + n(a.re) + '</b> redownloads</span><span><b style="color:var(--ink)">' + n(a.update) + '</b> updates</span>' + (a.iap ? '<span><b style="color:var(--ink)">' + n(a.iap) + '</b> purchases</span>' : '') + (money ? '<span>Proceeds ' + esc(money) + '</span>' : '') + '</div>' + barChart(a.daily, 'var(--volt)') + axis(d.days) + '</div>';
+    }).join('');
+    h += '<h2>Where downloads came from</h2><div class="card">' + bars(d.countries, function (r) { return r[0] || 'Unknown'; }, function (r) { return r[1]; }) + '</div>';
+    return h;
+  }
+  function setupHTML() {
+    var d = cur(), w = loading(d); if (w) return '<h1>Setup</h1>' + w;
+    var slugs = Object.keys(NAMES);
+    var snip = function (slug) { return '<script src="' + d.origin + '/kme.js" data-app="' + slug + '" defer></' + 'script>'; };
+    return '<h1>Setup</h1><p class="sub">What’s connected, and the line to add to each app.</p>' +
+      '<div class="list">' +
+      '<div class="row"><span class="grow"><div class="t">Login</div><div class="m">KME_USER and KME_PASSWORD</div></span><span class="ok">On</span></div>' +
+      '<div class="row"><span class="grow"><div class="t">Sports Hub sign-ups</div><div class="m">FIREBASE_SERVICE_ACCOUNT</div></span><span class="' + (d.sportsHub ? 'ok">On' : 'no">Not set') + '</span></div>' +
+      '<div class="row"><span class="grow"><div class="t">App Store downloads</div><div class="m">' + (d.appStore ? 'ASC_KEY_ID, ASC_ISSUER_ID, ASC_PRIVATE_KEY, ASC_VENDOR' : 'Missing: ' + esc(d.appStoreMissing.join(', '))) + '</div></span><span class="' + (d.appStore ? 'ok">On' : 'no">Not set') + '</span></div>' +
+      '</div>' +
+      '<h2>Tracker</h2><div class="card small">Add this one line inside <code>&lt;head&gt;</code> of each app, with that app’s name in <code>data-app</code>. Visits and errors show up within seconds. It stores no names, emails or IP addresses.</div>' +
+      '<div class="list" style="margin-top:10px">' + slugs.map(function (s) {
+        return '<div class="row" style="flex-direction:column;align-items:stretch;gap:6px"><div class="flex"><b class="grow">' + esc(NAMES[s]) + '</b><button class="btn sm" data-copy="' + esc(snip(s)) + '">Copy</button></div><code class="code">' + esc(snip(s)) + '</code></div>';
+      }).join('') + '</div>' +
+      '<h2>Milestones (optional)</h2><div class="card small">Count your own moments, like a sign-up or a purchase: <code>window.KME &amp;&amp; KME.event(\'Signed up\')</code>. They show under Milestones for that app.</div>' +
+      '<div style="margin:22px 0"><button class="btn" data-act="logout">Sign out</button></div>';
+  }
+
+  var TABS = [
+    ['overview', 'Overview', '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'],
+    ['sportshub', 'Sports Hub', '<circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'],
+    ['appstore', 'App Store', '<path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'],
+    ['errors', 'Errors', '<path d="M12 3l10 18H2L12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v5M12 18v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'],
+    ['setup', 'Setup', '<circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>']
+  ];
+  function render() {
+    if (!S.me) { root.innerHTML = '<div class="login"><span class="spin"></span></div>'; return; }
+    if (!S.me.signedIn) { root.innerHTML = loginHTML(); bindLogin(); return; }
+    var body = S.tab === 'overview' ? (S.app ? appHTML() : overviewHTML()) : S.tab === 'sportshub' ? sportsHubHTML() : S.tab === 'appstore' ? appStoreHTML() : S.tab === 'errors' ? errorsHTML() : setupHTML();
+    var showRange = S.tab === 'overview' || S.tab === 'appstore' || S.tab === 'errors';
+    var focus = document.activeElement && document.activeElement.hasAttribute('data-q');
+    root.innerHTML = '<header><div class="wrap hbar"><span class="logo">' + LOGO(26) + '</span><span class="brand grow">KME <span>Apps</span></span>' +
+      (showRange ? '<span class="seg">' + [7, 30, 90].map(function (x) { return '<button data-days="' + x + '" aria-pressed="' + (S.days === x) + '">' + x + 'd</button>'; }).join('') + '</span>' : '') +
+      '<button class="icon-btn" data-act="reload" aria-label="Refresh"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M20 11a8 8 0 10-2.3 5.7M20 4v7h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></header>' +
+      '<main class="wrap">' + body + '</main>' +
+      '<nav class="tabs"><div class="in">' + TABS.map(function (t) { return '<button data-tab="' + t[0] + '" ' + (S.tab === t[0] ? 'aria-current="page"' : '') + '><svg viewBox="0 0 24 24">' + t[2] + '</svg>' + t[1] + '</button>'; }).join('') + '</div></nav>';
+    if (focus) { var q = root.querySelector('[data-q]'); if (q) { q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
+  }
+  function bindLogin() {
+    var f = document.getElementById('login'); if (!f || !f.user) return;
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var b = f.querySelector('button'); b.disabled = true; b.innerHTML = '<span class="spin"></span>';
+      api('/api/login', { method: 'POST', body: { user: f.user.value, pass: f.pass.value } }).then(function () {
+        S.me = { signedIn: true }; render(); loadTab();
+      }).catch(function (err) { document.getElementById('lerr').textContent = err.message; b.disabled = false; b.textContent = 'Sign in'; f.pass.select(); });
+    });
+  }
+  root.addEventListener('click', function (e) {
+    var t = e.target.closest('button'); if (!t) return;
+    if (t.dataset.tab) { S.tab = t.dataset.tab; S.app = null; save(); window.scrollTo(0, 0); render(); loadTab(); return; }
+    if (t.dataset.days) { S.days = +t.dataset.days; save(); render(); loadTab(); return; }
+    if (t.dataset.app) { S.app = t.dataset.app; window.scrollTo(0, 0); render(); loadTab(); return; }
+    if (t.dataset.copy) { var v = t.dataset.copy; (navigator.clipboard ? navigator.clipboard.writeText(v) : Promise.reject()).then(function () { toast('Copied'); }, function () { prompt('Copy this line:', v); }); return; }
+    var a = t.dataset.act;
+    if (a === 'back') { S.app = null; render(); loadTab(); }
+    else if (a === 'reload') { if (S.tab === 'sportshub') return load('sportshub', '/api/sportshub?fresh=1'); loadTab(); }
+    else if (a === 'shRefresh') { S.data.sportshub.loading = true; render(); load('sportshub', '/api/sportshub?fresh=1'); }
+    else if (a === 'ascSync') {
+      S.busy = true; render();
+      api('/api/appstore/sync?days=' + Math.min(S.days, 60), { method: 'POST' }).then(function (r) { toast('Synced ' + r.days + ' days'); }).catch(function (err) { if (err.message !== 'signin') toast(err.message); }).then(function () { S.busy = false; loadTab(); });
+    }
+    else if (a === 'logout') { api('/api/logout', { method: 'POST' }).then(function () { S.me = { signedIn: false, setup: true }; S.data = {}; render(); }); }
+  });
+  root.addEventListener('input', function (e) { if (e.target.hasAttribute('data-q')) { S.q = e.target.value; render(); } });
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible' && S.me && S.me.signedIn) loadTab(); });
+
+  render();
+  fetch('/api/me', { credentials: 'same-origin' }).then(function (r) { return r.json(); }).then(function (m) { S.me = m; render(); if (m.signedIn) loadTab(); }).catch(function () { root.innerHTML = '<div class="login"><div class="box card">Can’t reach KME Apps. Check your connection and reload.</div></div>'; });
+})();
+</script>
+</body>
+</html>

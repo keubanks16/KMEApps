@@ -1,0 +1,18 @@
+# KME Apps: private analytics for all of Kollin's apps.
+# Cloudflare "Import a repository" deploys this Worker on every push to main.
+name = "kme-apps"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "kme-apps"
+database_id = "98bfeb8a-492c-4f17-96d2-15e905a1e750"
+
+# Daily: pull yesterday's App Store downloads and clear visits older than 400 days.
+[triggers]
+crons = ["17 15 * * *"]
+
+[vars]
+TZ = "America/New_York"
